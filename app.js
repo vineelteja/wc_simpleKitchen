@@ -1,0 +1,19 @@
+const express = require("express");
+const path = require("path");
+const routes = require("./routes/index");
+const bodyParser = require("body-parser");
+
+// Initialize express app.
+const app = express();
+
+// Add all static files from public directory to the app.
+app.use(express.static("public"));
+
+// To render html pages SET views from public dir.
+app.set("views", path.join(__dirname, "views-bk"));
+app.set("view engine", "pug");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/", routes);
+
+module.exports = app;

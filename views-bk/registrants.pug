@@ -1,0 +1,33 @@
+doctype html
+head
+  link(rel='preconnect' href='https://fonts.gstatic.com')
+  link(href='https://fonts.googleapis.com/css2?family=Sacramento&display=swap' rel='stylesheet')
+  link(rel='StyleSheet' href='css/styles.css' type='text/css')
+  script(src='script.js')
+  title "Restaurant"
+body
+  header
+    nav
+      ul
+        li
+          a(href='/') Home
+        li |
+        li
+          a(href='#') Blog
+    nav#reg
+      ul
+        li
+          a(href='/register') Register
+  main
+    div.regbox
+      if registrations.length
+        table.listing-table.table-dark.table-striped
+          tr.trrow
+            th Name
+            th Email
+          each registration in registrations
+            tr.trrow
+              td= registration.name
+              td= registration.email
+      else
+        p No registrations yet :(
