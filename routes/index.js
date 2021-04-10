@@ -111,11 +111,14 @@ router.post(
     check("name").isLength({ min: 1 }).withMessage("Please enter a name"),
     check("email").isLength({ min: 1 }).withMessage("Please enter an email"),
   ],
-  (req, res) => {
+  async (req, res) => {
     //console.log(req.body);
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       const registration = new Registration(req.body);
+      const bcrypt = require("bcrypt");
+      const salt = await bcrypt.genSalt(10);
+      registration.password = await bcrypt.hash(registration.password, salt);
       registration
         .save()
         .then(() => {
